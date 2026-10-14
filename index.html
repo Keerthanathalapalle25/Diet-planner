@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6ef">
+  <title>Daily Plate | Personal diet planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Daily Plate home">
+      <span class="brand-mark" aria-hidden="true">dp</span>
+      <span>daily plate</span>
+    </a>
+    <div class="local-status"><span class="status-dot" aria-hidden="true"></span><span>Private, local AI</span></div>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">A little more balance, every day</p>
+      <h1 id="page-title">A plan that fits <em>your</em> table.</h1>
+      <p class="intro-copy">Tell us what your day looks like. Your local AI will put together a flexible, practical menu.</p>
+    </section>
+
+    <div class="planner-grid">
+      <section class="form-panel" aria-labelledby="details-title">
+        <div class="panel-heading">
+          <div>
+            <p class="step-label">YOUR STARTING POINT <span>01 / 01</span></p>
+            <h2 id="details-title">A few details</h2>
+          </div>
+          <span class="heading-icon" aria-hidden="true">✳</span>
+        </div>
+        <form id="planner-form">
+          <div class="field-grid">
+            <label class="field">
+              <span>Age</span>
+              <div class="input-with-unit"><input name="age" type="number" min="18" max="100" placeholder="28" required><span>years</span></div>
+            </label>
+            <label class="field">
+              <span>Weight</span>
+              <div class="input-with-unit"><input name="weight" type="number" min="30" max="300" step="0.1" placeholder="68" required><span>kg</span></div>
+            </label>
+            <label class="field">
+              <span>Height</span>
+              <div class="input-with-unit"><input name="height" type="number" min="100" max="250" placeholder="170" required><span>cm</span></div>
+            </label>
+            <label class="field">
+              <span>Daily activity</span>
+              <select name="activity" required>
+                <option value="mostly seated">Mostly seated</option>
+                <option value="lightly active">Lightly active</option>
+                <option value="moderately active" selected>Moderately active</option>
+                <option value="very active">Very active</option>
+              </select>
+            </label>
+          </div>
+          <label class="field field-spaced">
+            <span>Your goal</span>
+            <select name="goal" required>
+              <option value="eat a more balanced variety">Eat a more balanced variety</option>
+              <option value="maintain my current weight">Maintain my current weight</option>
+              <option value="gradually lose weight">Gradually lose weight</option>
+              <option value="gradually gain weight">Gradually gain weight</option>
+              <option value="support an active routine">Support an active routine</option>
+            </select>
+          </label>
+          <label class="field field-spaced">
+            <span>Food preferences <small>Include dietary style, dislikes, or allergies</small></span>
+            <textarea name="preferences" rows="3" maxlength="300" placeholder="For example: vegetarian, no peanuts, love spicy food" required></textarea>
+          </label>
+          <button class="submit-button" type="submit"><span>Create my day</span><span aria-hidden="true">↗</span></button>
+          <p class="privacy-note">Your answers stay on this device and are sent only to your local Ollama model.</p>
+          <p class="form-error" id="form-error" role="alert" hidden></p>
+        </form>
+      </section>
+
+      <section class="result-panel" id="result-panel" aria-live="polite" aria-label="Your diet plan">
+        <div class="welcome-panel" id="welcome-panel">
+          <div class="welcome-image" role="img" aria-label="A colorful, balanced meal with vegetables and grains"></div>
+          <div class="welcome-copy">
+            <span class="welcome-kicker">GOOD FOOD, NO GUESSWORK</span>
+            <h2>Make room for<br>what feels good.</h2>
+            <p>Balanced ideas for real life: familiar ingredients, flexible portions, and small habits that add up.</p>
+            <div class="welcome-bottom"><span>01</span><span>BREAKFAST TO DINNER</span><span>✳</span></div>
+          </div>
+        </div>
+        <div id="plan-content" hidden></div>
+      </section>
+    </div>
+
+    <aside class="disclaimer"><span aria-hidden="true">ⓘ</span><p><strong>A note on wellbeing.</strong> Daily Plate shares general nutrition information, not medical advice. It is not a substitute for care from a registered dietitian or clinician. If you have a medical condition, are under 18, pregnant, or have a history of disordered eating, please seek personalized professional guidance.</p></aside>
+    <footer><span>DAILY PLATE <span aria-hidden="true">·</span> SMALL STEPS, WELL NOURISHED</span><a href="https://ollama.com" target="_blank" rel="noreferrer">Powered by Ollama ↗</a></footer>
+  </main>
+</body>
+</html>
